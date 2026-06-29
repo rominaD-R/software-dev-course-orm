@@ -1,9 +1,8 @@
 package com.example.orm_exercise.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Contact {
@@ -53,5 +52,12 @@ public class Contact {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact", orphanRemoval = true)
+    private List<Address> addresses;
+
+    public List<Address> getAddresses() {
+        return addresses;
     }
 }
